@@ -28,7 +28,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ec2
+        working-directory: $GITHUB_WORKSPACE/ec2
         
 
     steps:

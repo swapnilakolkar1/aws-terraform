@@ -28,6 +28,7 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: ec2
         
 
     steps:
@@ -70,14 +71,14 @@ jobs:
       uses: actions/upload-artifact@v2
       with: 
         name: generated-ppk
-        path: terraform-bin/ec2-key.ppk
+        path: ec2/ec2-key.ppk
    
     - name: Upload pem file
       if: "${{ github.event.inputs.tf-command == 'apply'}}"   
       uses: actions/upload-artifact@v2
       with: 
         name: generated-ppk
-        path: terraform-bin/ec2-key.pem
+        path: ec2/ec2-key.pem
           
     - name: Terraform Destroy
       if: "${{ github.event.inputs.tf-command == 'destroy'}}"

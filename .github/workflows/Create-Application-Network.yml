@@ -72,7 +72,6 @@ jobs:
     defaults:
       run:
         shell: bash
-        working-directory: ./network 
         
 
     steps:
@@ -82,7 +81,9 @@ jobs:
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v4
-       
+      with:
+        path : network
+         
 
     # action sets up AWS credentials for your workflow using the secrets you defined.
     - name: Configure AWS Credentials

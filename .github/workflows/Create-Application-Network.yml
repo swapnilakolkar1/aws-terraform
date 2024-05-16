@@ -56,6 +56,7 @@ on:
         - validate
         - plan
         - apply
+        - destroy
       environment:
         type: environment
 
@@ -72,7 +73,7 @@ jobs:
     defaults:
       run:
         shell: bash
-        
+        working-directory: network
 
     steps:
     - name: User selections
@@ -120,3 +121,8 @@ jobs:
     - name: Terraform Apply
       if: "${{ github.event.inputs.tf-command == 'apply'}}"
       run: terraform apply -auto-approve
+
+    - name: Terraform Destroy
+      if: "${{ github.event.inputs.tf-command == 'destroy'}}"
+      run: terraform destroy -auto-approve
+

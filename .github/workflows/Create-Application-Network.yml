@@ -47,10 +47,17 @@ name: 'Create-Application-Network'
 on:
   workflow_dispatch:
    inputs:
-      action:
-        description: 'Select an action'
+      name:
+        type: choice
+        description: Who to greet
         required: true
-        options: ['init', 'plan', 'apply']
+        options: 
+        - init
+        - plan
+        - apply
+      environment:
+        type: environment
+
 permissions:
   contents: read
 
@@ -58,7 +65,7 @@ jobs:
   terraform:
     name: 'Terraform'
     runs-on: ubuntu-latest
-    environment: production
+    environment: dev
 
     # Use the Bash shell regardless whether the GitHub Actions runner is ubuntu-latest, macos-latest, or windows-latest
     defaults:
@@ -66,6 +73,8 @@ jobs:
         shell: bash
 
     steps:
+    - name: Send greeting
+      run: echo "${{ github.event.inputs.environment }} > ${{ github.event.inputs.name }}"
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v4
@@ -76,6 +85,7 @@ jobs:
       with:
           aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: us-east-1
 
     # Install the latest version of Terraform CLI and configure the Terraform CLI configuration file with a Terraform Cloud user API token
     - name: Setup Terraform

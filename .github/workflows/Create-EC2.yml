@@ -64,6 +64,7 @@ jobs:
         terraform init
         terraform plan 
         terraform apply -auto-approve
+        pwd
         ls -l
         
     - name: Upload Artifacts

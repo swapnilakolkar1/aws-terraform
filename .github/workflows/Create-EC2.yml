@@ -64,6 +64,7 @@ jobs:
         terraform init
         terraform plan 
         terraform apply -auto-approve
+        ls -l
         
     - name: Upload ppk file
       if: "${{ github.event.inputs.tf-command == 'apply'}}"   
@@ -76,8 +77,8 @@ jobs:
       if: "${{ github.event.inputs.tf-command == 'apply'}}"   
       uses: actions/upload-artifact@v2
       with: 
-        name: generated-ppk
-        path: aws-terraform/aws-terraform/ec2-key.pem
+        name: generated-pem
+        path: ec2-key.pem
           
     - name: Terraform Destroy
       if: "${{ github.event.inputs.tf-command == 'destroy'}}"

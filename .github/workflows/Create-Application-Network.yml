@@ -49,7 +49,7 @@ on:
    inputs:
       name:
         type: choice
-        description: Who to greet
+        description: Select Terraform Command
         required: true
         options: 
         - init

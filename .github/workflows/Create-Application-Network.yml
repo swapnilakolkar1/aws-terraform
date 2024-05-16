@@ -120,6 +120,7 @@ jobs:
       if: "${{ github.event.inputs.tf-command == 'plan'}}"
       run: |
         cd $GITHUB_WORKSPACE/network
+        terraform init
         terraform plan 
 
       # On push to "main", build or change infrastructure according to Terraform configuration files
@@ -128,11 +129,13 @@ jobs:
       if: "${{ github.event.inputs.tf-command == 'apply'}}"
       run: |
         cd $GITHUB_WORKSPACE/network
+        terraform init
         terraform apply -auto-approve
 
     - name: Terraform Destroy
       if: "${{ github.event.inputs.tf-command == 'destroy'}}"
       run: |
         cd $GITHUB_WORKSPACE/network
+        terraform init
         terraform destroy -auto-approve
 

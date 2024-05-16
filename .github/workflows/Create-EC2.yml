@@ -71,14 +71,14 @@ jobs:
       uses: actions/upload-artifact@v2
       with: 
         name: generated-ppk
-        path: ec2/ec2-key.ppk
+        path: $GITHUB_WORKSPACE/ec2/ec2-key.ppk
    
     - name: Upload pem file
       if: "${{ github.event.inputs.tf-command == 'apply'}}"   
       uses: actions/upload-artifact@v2
       with: 
         name: generated-ppk
-        path: ec2/ec2-key.pem
+        path: $GITHUB_WORKSPACE/ec2/ec2-key.pem
           
     - name: Terraform Destroy
       if: "${{ github.event.inputs.tf-command == 'destroy'}}"

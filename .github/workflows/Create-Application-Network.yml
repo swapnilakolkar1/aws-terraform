@@ -72,10 +72,12 @@ jobs:
     defaults:
       run:
         shell: bash
+        working-directory: network
 
     steps:
-    - name: Send greeting
+    - name: User selections
       run: echo "${{ github.event.inputs.environment }} > ${{ github.event.inputs.tf-command }}"
+   
     # Checkout the repository to the GitHub Actions runner
     - name: Checkout
       uses: actions/checkout@v4

@@ -65,11 +65,19 @@ jobs:
         terraform plan 
         terraform apply -auto-approve
         
-        # Create a directory to store generated files
-        mkdir -p generated-files 
-        # Gather .ppk and .pem files
-          cp *.ppk $GITHUB_WORKSPACE/ec2/
-          cp *.pem $GITHUB_WORKSPACE/ec2/
+    - name: Upload ppk file
+      if: "${{ github.event.inputs.tf-command == 'apply'}}"   
+      uses: actions/upload-artifact@v2
+      with: 
+        name: generated-ppk
+        path: ec2-key.ppk
+   
+    - name: Upload pem file
+      if: "${{ github.event.inputs.tf-command == 'apply'}}"   
+      uses: actions/upload-artifact@v2
+      with: 
+        name: generated-ppk
+        path: ec2-key.pem
           
     - name: Terraform Destroy
       if: "${{ github.event.inputs.tf-command == 'destroy'}}"

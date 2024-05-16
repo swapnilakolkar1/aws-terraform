@@ -72,8 +72,8 @@ jobs:
       with:
           name: my-artifacts
           path: |
-            ec2-key.pem
-            ec2-key.ppk
+            /home/runner/work/aws-terraform/aws-terraform/ec2/ec2-key.pem
+            /home/runner/work/aws-terraform/aws-terraform/ec2/ec2-key.ppk
           
     - name: Terraform Destroy
       if: "${{ github.event.inputs.tf-command == 'destroy'}}"

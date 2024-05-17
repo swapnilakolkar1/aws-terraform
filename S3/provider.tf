@@ -1,13 +1,4 @@
 terraform {
-  backend "s3" {
-    bucket         = "t3erraform-state-46"
-    key            = "dev/vpc-network/terraform.tfstate"
-    region         = "us-east-1"
-    encrypt        = true
-    dynamodb_table = "terrafom-state-lock"
-    profile        = "terraform"
-
-  }
   required_providers {
     aws = {
       source  = "registry.terraform.io/hashicorp/aws"
@@ -20,5 +11,7 @@ provider "aws" {
   shared_credentials_files = ["C:\\Users\\swapnilAk\\.aws\\credentials"]
   shared_config_files      = ["C:\\Users\\swapnilAk\\.aws\\config"]
 }
+
+
 
 

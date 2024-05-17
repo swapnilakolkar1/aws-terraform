@@ -16,9 +16,8 @@ terraform {
   }
 }
 provider "aws" {
-  region                   = "us-east-1"
-  shared_credentials_files = ["C:\\Users\\swapnilAk\\.aws\\credentials"]
-  shared_config_files      = ["C:\\Users\\swapnilAk\\.aws\\config"]
+  region = "us-east-1"
+
 }
 
 

@@ -10,6 +10,7 @@ on:
         required: true
         options: 
         - init
+        - plan
         - apply
         - destroy
       environment:
@@ -59,15 +60,17 @@ jobs:
         cd $GITHUB_WORKSPACE/ec2
         terraform init
         
+    - name: Terraform Plan
+      if: "${{ github.event.inputs.tf-command == 'plan'}}"   
+      run: |
+          cd $GITHUB_WORKSPACE/ec2
+          terraform plan
+
     - name: Terraform Apply
       if: "${{ github.event.inputs.tf-command == 'apply'}}"
       run: |
         cd $GITHUB_WORKSPACE/ec2
-        terraform init
-        terraform plan 
         terraform apply -auto-approve
-        pwd
-        ls -l
         
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
@@ -81,6 +84,5 @@ jobs:
       if: "${{ github.event.inputs.tf-command == 'destroy'}}"
       run: |
         cd $GITHUB_WORKSPACE/ec2
-        terraform init
         terraform destroy -auto-approve
 

@@ -12,6 +12,3 @@ provider "aws" {
   shared_config_files      = ["C:\\Users\\swapnilAk\\.aws\\config"]
 }
 
-
-
-

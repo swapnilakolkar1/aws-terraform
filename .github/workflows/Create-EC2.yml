@@ -9,6 +9,7 @@ on:
         description: Select Terraform Command
         required: true
         options: 
+        - init
         - apply
         - destroy
       environment:
@@ -57,6 +58,7 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/ec2
         terraform init
+        
     - name: Terraform Apply
       if: "${{ github.event.inputs.tf-command == 'apply'}}"
       run: |

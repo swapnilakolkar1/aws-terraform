@@ -1,7 +1,7 @@
 resource "aws_s3_bucket" "terraform-state" {
-  bucket = "terraform-state-46"
+  bucket = "terraform-state-461995"
   tags = {
-    "Name" = "terraform-state-46"
+    "Name" = "terraform-state-461995"
   }
 }
 resource "aws_dynamodb_table" "key-lock-for-terraform-state" {

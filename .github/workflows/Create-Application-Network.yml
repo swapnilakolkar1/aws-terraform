@@ -100,7 +100,7 @@ jobs:
       if: "${{ github.event.inputs.tf-command == 'init'}}"   
       run: |
         cd $GITHUB_WORKSPACE/network
-        terraform init
+        terraform init -reconfigure
 
     # Generates an execution plan for Terraform
     - name: Terraform Plan

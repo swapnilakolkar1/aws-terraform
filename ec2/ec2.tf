@@ -27,7 +27,7 @@ resource "aws_instance" "my_instance1" {
   ami             = "ami-04b70fa74e45c3917" # Canonical, Ubuntu, 24.04 LTS, amd64 noble image build on 2024-04-23
   instance_type   = "t2.micro"
   subnet_id       = data.aws_subnet.public-subnet1.id
-  security_groups = [data.aws_security_group.public-security_group_id.id] #without security group can not connect to ec2 ssh port needs to be open for 0.0.0.0/0
+  vpc_security_group_ids = [data.aws_security_group.public-security_group_id.id] #without security group can not connect to ec2 ssh port needs to be open for 0.0.0.0/0
   key_name        = aws_key_pair.kp.key_name # Replace with your SSH key pair name
   depends_on      = [aws_key_pair.kp]
   tags = {

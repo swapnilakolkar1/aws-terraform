@@ -64,14 +64,14 @@ jobs:
       run: |
           cd $GITHUB_WORKSPACE/ec2
           terraform init
-          terraform plan
+          terraform plan -out=tplan
 
     - name: Terraform Apply
       if: "${{ github.event.inputs.tf-command == 'apply'}}"
       run: |
         cd $GITHUB_WORKSPACE/ec2
         terraform init
-        terraform apply -auto-approve
+        terraform apply tplan -auto-approve
         
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
@@ -86,5 +86,5 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/ec2
         terraform init
-        terraform destroy -auto-approve
+        terraform destroy tplan -auto-approve
 

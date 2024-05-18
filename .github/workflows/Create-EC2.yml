@@ -9,7 +9,6 @@ on:
         description: Select Terraform Command
         required: true
         options: 
-        - init
         - plan
         - apply
         - destroy
@@ -64,12 +63,14 @@ jobs:
       if: "${{ github.event.inputs.tf-command == 'plan'}}"   
       run: |
           cd $GITHUB_WORKSPACE/ec2
+          terraform init
           terraform plan
 
     - name: Terraform Apply
       if: "${{ github.event.inputs.tf-command == 'apply'}}"
       run: |
         cd $GITHUB_WORKSPACE/ec2
+        terraform init
         terraform apply -auto-approve
         
     - name: Upload Artifacts
@@ -84,5 +85,6 @@ jobs:
       if: "${{ github.event.inputs.tf-command == 'destroy'}}"
       run: |
         cd $GITHUB_WORKSPACE/ec2
+        terraform init
         terraform destroy -auto-approve
 

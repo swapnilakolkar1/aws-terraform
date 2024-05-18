@@ -71,7 +71,7 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/ec2
         terraform init
-        terraform apply tplan -auto-approve
+        terraform apply -state=tplan -auto-approve
         
     - name: Upload Artifacts
       uses: actions/upload-artifact@v2
@@ -86,5 +86,5 @@ jobs:
       run: |
         cd $GITHUB_WORKSPACE/ec2
         terraform init
-        terraform destroy tplan -auto-approve
+        terraform destroy -state=tplan -auto-approve
 

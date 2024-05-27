@@ -17,6 +17,9 @@ data "aws_subnet" "public-subnet2" {
 resource "aws_db_subnet_group" "db-subnet-group" {
   name       = "db-subnet-group"
   subnet_ids = [data.aws_subnet.public-subnet1.id, data.aws_subnet.public-subnet2.id]
+  lifecycle {
+
+  }
   tags = {
     Name = "db-subnet-group"
   }
@@ -48,7 +51,7 @@ resource "aws_db_instance" "aws-db" {
 
   identifier             = "aws-db"
   instance_class         = "db.t3.micro"
-  engine                 = "postgresql"
+  engine                 = "postgres"
   engine_version         = "16.2"
   username               = "postgres"
   password               = "postgres"
@@ -63,11 +66,11 @@ resource "aws_db_instance" "aws-db" {
   db_name                      = "aws-db"
   port                         = 5432
   allocated_storage            = 20 #GiB
-  max_allocated_storage        = 100
+  max_allocated_storage        = 1000
   deletion_protection          = true
   auto_minor_version_upgrade   = true
   performance_insights_enabled = true
-
+  storage_type                 = "gp2"
 }
 
 # resource "aws_db_instance" "aws-db-replica" {

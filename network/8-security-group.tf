@@ -36,6 +36,16 @@ resource "aws_security_group_rule" "allow-https" {
   cidr_blocks       = ["0.0.0.0/0"]
 }
 
+resource "aws_security_group_rule" "allow-postgres" {
+  security_group_id = aws_security_group.app1-sg-public-resource.id
+  type              = "ingress"
+  description       = "allow-postgres  connection  from anywhere"
+  protocol          = "tcp"
+  to_port           = 3306
+  from_port         = 3306
+  cidr_blocks       = ["0.0.0.0/0"]
+}
+
 resource "aws_security_group_rule" "allow-all" {
   security_group_id = aws_security_group.app1-sg-public-resource.id
   type              = "egress"

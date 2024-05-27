@@ -41,8 +41,8 @@ resource "aws_security_group_rule" "allow-postgres" {
   type              = "ingress"
   description       = "allow-postgres  connection  from anywhere"
   protocol          = "tcp"
-  to_port           = 3306
-  from_port         = 3306
+  to_port           = 5432
+  from_port         = 5432
   cidr_blocks       = ["0.0.0.0/0"]
 }
 

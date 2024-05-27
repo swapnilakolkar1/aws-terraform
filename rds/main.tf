@@ -68,11 +68,16 @@ resource "aws_db_instance" "aws-db" {
   auto_minor_version_upgrade   = true
   performance_insights_enabled = true
   backup_retention_period      = 7 # 7 days The number of days (1-35) for which automatic backups are kept.
-
-  storage_type = "gp3"
+  backup_window                = "09:46-10:16"
+  storage_type                 = "gp3"
   tags = {
     Name = "PostgreSQL v16.2"
   }
+}
+resource "aws_db_instance_automated_backups_replication" "backup-replication" {
+  source_db_instance_arn = aws_db_instance.aws-db.arn
+  retention_period       = 7
+  depends_on             = [aws_db_instance.aws-db]
 }
 
 resource "aws_db_instance" "aws-db-replica" {

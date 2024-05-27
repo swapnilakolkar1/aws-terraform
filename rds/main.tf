@@ -67,21 +67,32 @@ resource "aws_db_instance" "aws-db" {
   deletion_protection          = true
   auto_minor_version_upgrade   = true
   performance_insights_enabled = true
-  storage_type                 = "gp2"
+  backup_retention_period      = 7 # 7 days The number of days (1-35) for which automatic backups are kept.
+
+  storage_type = "gp3"
   tags = {
     Name = "PostgreSQL v16.2"
   }
 }
 
 resource "aws_db_instance" "aws-db-replica" {
-  identifier             = "aws-db-replica"
-  replicate_source_db    = aws_db_instance.aws-db.identifier
-  instance_class         = "db.t3.micro"
-  apply_immediately      = true
-  publicly_accessible    = true
-  skip_final_snapshot    = true
-  vpc_security_group_ids = [data.aws_security_group.public_security_group_id.id]
-  parameter_group_name   = aws_db_parameter_group.db-parameter.name
+  backup_retention_period    = 7
+  storage_type               = "gp3"
+  identifier                 = "aws-db-replica"
+  replicate_source_db        = aws_db_instance.aws-db.identifier
+  auto_minor_version_upgrade = false
+  replica_mode               = "mounted"
+  instance_class             = "db.t3.micro"
+  apply_immediately          = true
+  publicly_accessible        = true
+  skip_final_snapshot        = true
+  vpc_security_group_ids     = [data.aws_security_group.public_security_group_id.id]
+  parameter_group_name       = aws_db_parameter_group.db-parameter.name
+  timeouts {
+    create = "3h"
+    delete = "3h"
+    update = "3h"
+  }
   tags = {
     Name = "PostgreSQL v16.2-replica"
   }

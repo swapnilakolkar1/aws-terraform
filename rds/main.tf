@@ -63,7 +63,7 @@ resource "aws_db_instance" "aws-db" {
   tags = {
     Name = "PostgreSQL v16.2"
   }
-  db_name                      = "aws-db"
+  db_name                      = "app1Db"
   port                         = 5432
   allocated_storage            = 20 #GiB
   max_allocated_storage        = 1000

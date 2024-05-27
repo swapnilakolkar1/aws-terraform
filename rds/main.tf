@@ -49,20 +49,17 @@ resource "aws_db_parameter_group" "db-parameter" {
 
 resource "aws_db_instance" "aws-db" {
 
-  identifier             = "aws-db"
-  instance_class         = "db.t3.micro"
-  engine                 = "postgres"
-  engine_version         = "16.2"
-  username               = "postgres"
-  password               = "postgres"
-  db_subnet_group_name   = aws_db_subnet_group.db-subnet-group.name
-  vpc_security_group_ids = [data.aws_security_group.public_security_group_id.id]
-  parameter_group_name   = aws_db_parameter_group.db-parameter.name
-  publicly_accessible    = true
-  skip_final_snapshot    = true
-  tags = {
-    Name = "PostgreSQL v16.2"
-  }
+  identifier                   = "aws-db"
+  instance_class               = "db.t3.micro"
+  engine                       = "postgres"
+  engine_version               = "16.2"
+  username                     = "postgres"
+  password                     = "postgres"
+  db_subnet_group_name         = aws_db_subnet_group.db-subnet-group.name
+  vpc_security_group_ids       = [data.aws_security_group.public_security_group_id.id]
+  parameter_group_name         = aws_db_parameter_group.db-parameter.name
+  publicly_accessible          = true
+  skip_final_snapshot          = true
   db_name                      = "app1Db"
   port                         = 5432
   allocated_storage            = 20 #GiB
@@ -71,18 +68,21 @@ resource "aws_db_instance" "aws-db" {
   auto_minor_version_upgrade   = true
   performance_insights_enabled = true
   storage_type                 = "gp2"
+  tags = {
+    Name = "PostgreSQL v16.2"
+  }
 }
 
-# resource "aws_db_instance" "aws-db-replica" {
-#   identifier             = "aws-db-replica"
-#   replicate_source_db    = aws_db_instance.aws-db.identifier
-#   instance_class         = "db.r5.large"
-#   apply_immediately      = true
-#   publicly_accessible    = true
-#   skip_final_snapshot    = true
-#   vpc_security_group_ids = [data.aws_security_group.public_security_group_id.id]
-#   parameter_group_name   = aws_db_parameter_group.db-parameter.name
-#   tags = {
-#     Name = "Aurora (PostgreSQL) v15.4 -replica"
-#   }
-# }
+resource "aws_db_instance" "aws-db-replica" {
+  identifier             = "aws-db-replica"
+  replicate_source_db    = aws_db_instance.aws-db.identifier
+  instance_class         = "db.t3.micro"
+  apply_immediately      = true
+  publicly_accessible    = true
+  skip_final_snapshot    = true
+  vpc_security_group_ids = [data.aws_security_group.public_security_group_id.id]
+  parameter_group_name   = aws_db_parameter_group.db-parameter.name
+  tags = {
+    Name = "PostgreSQL v16.2-replica"
+  }
+}

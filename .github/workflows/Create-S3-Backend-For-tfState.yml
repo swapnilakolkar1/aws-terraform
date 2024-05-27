@@ -57,7 +57,7 @@ jobs:
         cd $GITHUB_WORKSPACE/S3-backend
         terraform init
         terraform plan 
-        terraform apply tplan -auto-approve
+        terraform apply -auto-approve
 
     - name: Terraform Destroy
       if: "${{ github.event.inputs.tf-command == 'destroy'}}"

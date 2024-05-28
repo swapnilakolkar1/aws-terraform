@@ -48,7 +48,6 @@ resource "aws_db_parameter_group" "db-parameter" {
 
 
 resource "aws_db_instance" "aws-db" {
-
   identifier                   = "aws-db"
   instance_class               = "db.t3.micro"
   engine                       = "postgres"
@@ -81,10 +80,12 @@ resource "aws_db_instance_automated_backups_replication" "backup-replication" {
 }
 
 resource "aws_db_instance" "aws-db-replica" {
+  allocated_storage          = 20 #GiB
+  max_allocated_storage      = 1000
   backup_retention_period    = 7
   storage_type               = "gp3"
   identifier                 = "aws-db-replica"
-  replicate_source_db        = aws_db_instance.aws-db.identifier
+  replicate_source_db        = aws_db_instance.aws-db.id
   auto_minor_version_upgrade = false
   replica_mode               = "mounted"
   instance_class             = "db.t3.micro"

@@ -57,6 +57,7 @@ resource "aws_db_instance" "aws-db" {
   db_subnet_group_name         = aws_db_subnet_group.db-subnet-group.name
   vpc_security_group_ids       = [data.aws_security_group.public_security_group_id.id]
   parameter_group_name         = aws_db_parameter_group.db-parameter.name
+  availability_zone            = "us-east-1a"
   publicly_accessible          = true
   skip_final_snapshot          = true
   db_name                      = "app1Db"
@@ -73,15 +74,10 @@ resource "aws_db_instance" "aws-db" {
     Name = "PostgreSQL v16.2"
   }
 }
-resource "aws_db_instance_automated_backups_replication" "backup-replication" {
-  source_db_instance_arn = aws_db_instance.aws-db.arn
-  retention_period       = 7
-  depends_on             = [aws_db_instance.aws-db]
-}
+
 
 resource "aws_db_instance" "aws-db-replica" {
-  allocated_storage          = 20 #GiB
-  max_allocated_storage      = 1000
+  availability_zone          = "us-east-1b"
   backup_retention_period    = 7
   storage_type               = "gp3"
   identifier                 = "aws-db-replica"

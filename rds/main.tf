@@ -57,7 +57,7 @@ resource "aws_db_instance" "aws-db" {
   db_subnet_group_name         = aws_db_subnet_group.db-subnet-group.name
   vpc_security_group_ids       = [data.aws_security_group.public_security_group_id.id]
   parameter_group_name         = aws_db_parameter_group.db-parameter.name
-  availability_zone            = "us-east-1a"
+  multi_az                     = true
   publicly_accessible          = true
   skip_final_snapshot          = true
   db_name                      = "app1Db"
@@ -77,7 +77,6 @@ resource "aws_db_instance" "aws-db" {
 
 
 resource "aws_db_instance" "aws-db-replica" {
-  availability_zone          = "us-east-1b"
   backup_retention_period    = 7
   storage_type               = "gp3"
   identifier                 = "aws-db-replica"

@@ -83,7 +83,6 @@ resource "aws_db_instance" "aws-db-replica" {
   identifier                 = "aws-db-replica"
   replicate_source_db        = aws_db_instance.aws-db.identifier
   auto_minor_version_upgrade = false
-  replica_mode               = "mounted"
   instance_class             = "db.t3.micro"
   apply_immediately          = true
   publicly_accessible        = true

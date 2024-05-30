@@ -78,8 +78,8 @@ jobs:
       with:
           name: aws-runner-key
           path: |
-            /home/runner/work/aws-terraform/aws-terraform/ec2/aws-runner-key.pem
-            /home/runner/work/aws-terraform/aws-terraform/ec2/aws-runner-key.ppk
+            /home/runner/work/aws-terraform/aws-terraform/aws-runner/aws-runner-key.pem
+            /home/runner/work/aws-terraform/aws-terraform/aws-runner/aws-runner-key.ppk
           
     - name: Terraform Destroy
       if: "${{ github.event.inputs.tf-command == 'destroy'}}"

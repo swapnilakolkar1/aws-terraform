@@ -1,3 +1,4 @@
+#! /bin/bash
 # Create a folder
 mkdir actions-runner && cd actions-runner
  # Download the latest runner package

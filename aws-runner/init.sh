@@ -1,4 +1,6 @@
 #! /bin/bash
+sudo apt-get update
+
 # Create a folder
 mkdir actions-runner && cd actions-runner
  # Download the latest runner package

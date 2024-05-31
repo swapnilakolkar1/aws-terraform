@@ -14,7 +14,11 @@ tar xzf ./actions-runner-linux-x64-2.316.1.tar.gz
 # Create the runner and start the configuration experience
 ./config.sh --url https://github.com/swapnilakolkar1/next-project1-backend --token AES245XRJMTWMIULK6YGVTTGLCA7E --name "aws-runner" --unattended
 # Last step, run it!
- ./run.sh
+
+./svc.sh install
+./svc.sh start
+
+# ./run.sh
 
 # Use this YAML in your workflow file for each job
 # runs-on: self-hosted
